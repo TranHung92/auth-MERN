@@ -15,6 +15,7 @@ import Feature from './components/feature';
 import App from './components/app';
 import Welcome from './components/welcome';
 import Header from './components/header'
+import RequireAuth from './components/auth/require_auth';
 import reducers from './reducers';
 import { AUTH_USER } from './actions/types';
 
@@ -38,7 +39,7 @@ ReactDOM.render(
           <Route path='/signin' component={Signin} /> 
           <Route path='/signup' component={Signup} /> 
           <Route path='/signout' component={Signout} />
-          <Route path='/app' component={App} />
+          <Route path="/feature" component={RequireAuth(Feature)} />
           <Route path='/' component={Welcome} />
         </Switch>        
       </div>

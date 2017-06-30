@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
+import { push } from 'react-router-redux';
 
 export default function(ComposedComponent) {
   class Authentication extends Component {
@@ -11,13 +12,13 @@ export default function(ComposedComponent) {
 
     componentWillMount() {
       if (!this.props.authenticated) {
-        this.context.router.push('/');
+        this.props.history.push('/');
       }
     }
 
     componentWillUpdate(nextProps) {
       if (!nextProps.authenticated) {
-        this.context.router.push('/');
+        this.props.history.push('/');
       }
     }
 

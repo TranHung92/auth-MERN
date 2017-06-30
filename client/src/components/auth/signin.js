@@ -5,6 +5,10 @@ import { withRouter } from 'react-router-dom'
 import * as actions from '../../actions'
 
 class Signin extends Component {
+  componentDidMount() {
+    this.props.resetError()
+  }
+  
   renderField(field) {
     const { input, label, type, meta: { touched, error } } = field;
     const className = `form-group ${touched && error ? 'has-danger' : ''}`;
@@ -33,12 +37,12 @@ class Signin extends Component {
     }
   }
 
-  onSubmit({ email, password }) {
-    this.props.signinUser({ email, password })
+  onSubmit(values) {
+    this.props.signinUser(values)
   }
 
   render() {
-    const { handleSubmit, submitting } = this.props;
+    const { handleSubmit } = this.props;
     return (
       <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field 
@@ -54,7 +58,7 @@ class Signin extends Component {
           label='Password'
         />
         {this.renderAlert()}
-        <button type='submit' disabled={submitting} className='btn btn-primary'>Login</button>
+        <button type='submit' className='btn btn-primary'>Login</button>
       </form>
     )
   }
@@ -77,6 +81,5 @@ function mapStateToProps(state) {
 
 export default reduxForm({
   validate,
-  form: 'signin',
-  fields: ['email', 'password']
+  form: 'signin'
 })((connect(mapStateToProps, actions)(Signin)))

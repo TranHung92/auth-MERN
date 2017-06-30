@@ -15,19 +15,19 @@ export function signinUser(values) {
 			.then(response => {
 				dispatch({ type: AUTH_USER });
 				localStorage.setItem('token', response.data.token);
-				dispatch(push('/app'));
+				dispatch(push('/feature'));
 			})
 			.catch(() => dispatch(authError('Wrong Login Info')));
 	}
 }
 
-export function signupUser({ email, password }) {
+export function signupUser(values) {
 	return function(dispatch) {
-		axios.post(`${ROOT_URL}/signup`, { email, password })
+		axios.post(`${ROOT_URL}/signup`, values)
 			.then(response => {
 				dispatch({ type: AUTH_USER });
 				localStorage.setItem('token', response.data.token);
-				dispatch(push('/app'));
+				dispatch(push('/feature'));
 			})
 			.catch(error => dispatch(authError(error.response.data.error)));
 	}
@@ -45,3 +45,20 @@ export function signoutUser() {
 	return { type: UNAUTH_USER }
 }
 
+export function fetchMessage() {
+	return function(dispatch) {
+		axios.get(`${ROOT_URL}/auth`, {
+			headers: { authorization: localStorage.getItem('token') }
+		})
+			.then(response => {
+				dispatch({
+					type: FETCH_MESSAGE,
+					payload: response.data.message
+				})
+			})
+	}
+}
+
+export function resetError() {
+	return authError(null)
+}

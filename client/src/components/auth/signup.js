@@ -5,6 +5,10 @@ import * as actions from '../../actions';
 import { withRouter } from 'react-router-dom'
 
 class Signup extends Component {
+  componentDidMount() {
+    this.props.resetError()
+  }
+
   renderField(field) {
     const { input, label, type, meta: { touched, error } } = field;
     const className = `form-group ${touched && error ? 'has-danger' : ''}`;
