@@ -7,7 +7,7 @@ import {
 	FETCH_MESSAGE
 } from './types';
 
-const ROOT_URL = 'http://localhost:6060';
+const ROOT_URL = 'http://localhost:6060/api';
 
 export function signinUser(values) {
 	return function(dispatch) {

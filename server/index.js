@@ -5,7 +5,8 @@ const express 		= require('express'),
 			morgan 			= require('morgan'),
 			mongoose 		= require('mongoose'),
 			cors 				= require('cors'),
-			router 			= require('./router')
+			router 			= require('./router'),
+			path 				= require('path');
 
 console.log(process.env.NODE_ENV)
 if (process.env.NODE_ENV === 'development') {
@@ -14,9 +15,13 @@ if (process.env.NODE_ENV === 'development') {
 	mongoose.connect('mongodb://mrhubo:mrhubo161@ds121091.mlab.com:21091/authentication-mern')
 }
 
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+
 app.use(morgan('combined'));
 app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
+
 router(app);
 
 const port = process.env.PORT || 6060;
