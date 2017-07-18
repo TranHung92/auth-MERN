@@ -1,5 +1,4 @@
 const Authentication = require('./controllers/authentication');
-const Story = require('./controllers/story');
 const passportService = require('./services/passport');
 const passport = require('passport');
 
