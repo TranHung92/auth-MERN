@@ -7,9 +7,12 @@ const express 		= require('express'),
 			cors 				= require('cors'),
 			router 			= require('./router')
 
-
-
-mongoose.connect('mongodb://localhost:auth/medium-clone');
+console.log(process.env.NODE_ENV)
+if (process.env.NODE_ENV === 'development') {
+	mongoose.connect('mongodb://localhost:auth/testing');
+} else {
+	mongoose.connect('mongodb://mrhubo:mrhubo161@ds121091.mlab.com:21091/authentication-mern')
+}
 
 app.use(morgan('combined'));
 app.use(cors());

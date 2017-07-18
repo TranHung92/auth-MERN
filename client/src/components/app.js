@@ -5,7 +5,7 @@ import Header from './header';
 export default class App extends Component {
   render() {
     return (
-      <div>
+      <div className="col-md-6 col-md-offset-3">
 				<Header />
 				{this.props.children}
       </div>
